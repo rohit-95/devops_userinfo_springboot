@@ -1,0 +1,4 @@
+/home/ubuntu/springboot-k8s-mysql/src/main/java/com/example/k8s/springbootk8smysql/controller/UserController.java
+/home/ubuntu/springboot-k8s-mysql/src/main/java/com/example/k8s/springbootk8smysql/SpringbootK8sMysqlApplication.java
+/home/ubuntu/springboot-k8s-mysql/src/main/java/com/example/k8s/springbootk8smysql/entity/User.java
+/home/ubuntu/springboot-k8s-mysql/src/main/java/com/example/k8s/springbootk8smysql/repository/UserRepository.java
