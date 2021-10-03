@@ -15,7 +15,7 @@ pipeline {
         stage('Build docker image') {
            steps {
                script {         
-                 def customImage = docker.build('rohit-95/devops_userinfo_springboot', ".")
+                 def customImage = docker.build('rohitsutar24/devops_userinfo_springboot', ".")
                  docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                  customImage.push("${env.BUILD_NUMBER}")
                  }                     
