@@ -12,12 +12,10 @@ pipeline {
 
         stage('Cloning Git Repo') {
             steps {
-                sh '''
+
                   git branch: 'master',
                   credentialsId: 'rohit-cred',
                   url: 'git@github.com:rohit-95/devops_userinfo_springboot.git'
-
-                '''
             }
         }
 
