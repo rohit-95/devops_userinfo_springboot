@@ -32,7 +32,7 @@ pipeline {
                    withDockerRegistry(credentialsId: 'ecr:us-east-1:ecr:us-east-1', url: 'https://339021997421.dkr.ecr.us-east-1.amazonaws.com') {
                         def version_value = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
                         sh "echo Project in version value: $version_value"
-                        def VERSION = version_value.split(/=/)[1]
+                        def VERSION = $version_value
                         sh "echo VERSION=$VERSION > version.ini"
                         sh '''
                           source version.ini
