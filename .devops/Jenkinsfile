@@ -35,7 +35,7 @@ pipeline {
                         def VERSION = version_value
                         sh "echo VERSION=$VERSION > version.ini"
                         sh '''
-                          source version.ini
+                          . ./version.ini
                           GIT_COMMIT_ID="$(echo $(git rev-parse HEAD) | cut -c 1-7)"
                           TIMESTAMP=$(date +'%Y%m%d.%H%M')
                           export TAG_NAME=v-$VERSION-$TIMESTAMP-$GIT_COMMIT_ID
