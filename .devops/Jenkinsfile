@@ -15,7 +15,7 @@ pipeline {
 
                   git branch: 'master',
                   credentialsId: 'rohit-cred',
-                  url: 'git@github.com:rohit-95/devops_userinfo_springboot.git'
+                  url: 'https://github.com/rohit-95/devops_userinfo_springboot.git'
             }
         }
 
