@@ -1,7 +1,7 @@
 pipeline {
     environment {
       DOCKER_REPOSITORY_URI = '339021997421.dkr.ecr.us-east-1.amazonaws.com/themusk/dev/userandcountry'
-      registryCredentialId = ''
+      registryCredentialId = 'ecr:us-east-1'
   }
 
   agent any
@@ -14,8 +14,8 @@ pipeline {
         stage('Cloning Git Repo') {
             steps {
                 sh '''
-                  git branch: ${Branch},
-                  credentialsId: 'my_cred_id',
+                  git branch: 'master',
+                  credentialsId: 'rohit-cred',
                   url: 'git@github.com:rohit-95/devops_userinfo_springboot.git'
 
                 '''
@@ -32,7 +32,7 @@ pipeline {
         stage('Build & push Docker image') {
             steps {
                 script {
-                   withDockerRegistry(credentialsId: 'ecr:ap-south-1:ecr-cred', url: 'https://339021997421.dkr.ecr.us-east-1.amazonaws.com') {
+                   withDockerRegistry(credentialsId: 'ecr:us-east-1', url: 'https://339021997421.dkr.ecr.us-east-1.amazonaws.com') {
                         def version_value = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
                         sh "echo Project in version value: $version_value"
                         def VERSION = version_value.split(/=/)[1]
@@ -52,7 +52,6 @@ pipeline {
                           echo "TAG_NAME=$TAG_NAME" > tagname.ini
                           docker rmi -f $IMG_NAME
                           docker rmi -f $IMAGE
-
                         '''
 
                     }
