@@ -1,0 +1,42 @@
+#'Deployment' of mysql
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  selector: 
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels: 
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:5.7 
+        name: mysql 
+        env:
+        - name: MYSQL_ROOT_PASSWORD 
+          valueFrom:
+            secretKeyRef:
+              name: db-root-credentials 
+              key: password  
+        - name: MYSQL_USER 
+          valueFrom:
+            secretKeyRef:
+              name: db-nonroot-user-credentials
+              key: username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-nonroot-user-credentials
+              key: password
+        - name: MYSQL_DATABASE 
+          valueFrom:
+            configMapKeyRef:
+              name: hostname-dbname-config
+              key: name
+        ports:
+        - containerPort: 3306

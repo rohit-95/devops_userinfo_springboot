@@ -1,0 +1,40 @@
+apiVersion: apps/v1 
+kind: Deployment    
+metadata:              
+  name: springboot-userinfo
+spec:                
+  selector:         
+    matchLabels:
+      app: springboot-userinfo
+  replicas: 1        
+  template:
+    metadata:
+      labels:        
+        app: springboot-userinfo
+    spec:
+      containers:
+        - name: springboot-userinfo-container
+          image: rohitsutar/userinfo-springboot:v1
+          ports:
+            - containerPort: 8080                
+          env:   
+          - name: DB_HOST   
+            valueFrom: 
+              configMapKeyRef:
+                name: hostname-dbname-config  
+                key: host
+          - name: DB_NAME  
+            valueFrom:
+              configMapKeyRef:
+                name: hostname-dbname-config
+                key: name
+          - name: DB_USERNAME  
+            valueFrom:
+              secretKeyRef:
+                name: db-nonroot-user-credentials 
+                key: username
+          - name: DB_PASSWORD 
+            valueFrom:
+              secretKeyRef:
+                name: db-nonroot-user-credentials
+                key: password 
