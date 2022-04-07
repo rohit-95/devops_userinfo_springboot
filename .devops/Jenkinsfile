@@ -50,6 +50,13 @@ pipeline {
                           docker rmi -f $IMG_NAME
                           docker rmi -f $IMAGE
                         '''
+                        withCredentials([file(credentialsId: "dev", variable: 'KUBECONFIG')]) {
+                        sh '''
+
+                        kubectl get po 
+
+                        '''
+				    }
 
                     }
                 }
