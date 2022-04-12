@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: springboot-userinfo-container
-          image: rohitsutar/userinfo-springboot:v1
+          image: 315278122682.dkr.ecr.us-east-1.amazonaws.com/cloud7/dev/userandcountry:v-0.0.1-SNAPSHOT
           ports:
             - containerPort: 8080                
           env:   
