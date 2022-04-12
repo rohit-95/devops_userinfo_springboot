@@ -51,9 +51,11 @@ pipeline {
                           docker rmi -f $IMAGE
                         '''
                         withCredentials([file(credentialsId: "devconf", variable: 'KUBECONFIG')]) {
-			sh "pwd"
-			sh "cd .devops/spring-boot-yml/"
-                        sh "kubectl apply  -f ."
+			sh '''
+			pwd
+			cd .devops/spring-boot-yml/
+                        kubectl apply  -f .
+			'''
 			 }
 
                     }
