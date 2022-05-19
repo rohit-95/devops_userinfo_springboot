@@ -13,7 +13,7 @@ phases:
     - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
-    - echo Build started on `date`
+    - echo Build started on `datee`
     - mvn  clean install -DskipTests
     - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
     - docker build --no-cache -f docker/Dockerfile -t $REPOSITORY_URI:latest .
